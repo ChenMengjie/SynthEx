@@ -1,0 +1,11 @@
+Package: SynthEx
+Type: Package
+Title: What the package does (short line)
+Version: 1.01
+Date: 2016-04-17
+Author: Mengjie Chen
+Maintainer: Mengjie Chen <mengjie@email.unc.edu>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+LinkingTo: mclust, flsa, foreach, DNAcopy, ggplot2, gridExtra, inline, Rcpp
+Imports: mclust, flsa, foreach, DNAcopy, ggplot2, gridExtra, inline, Rcpp

@@ -12,10 +12,30 @@ It is tailored to cater for the multiple characteristics of different next gener
 ### Installation
 
 **SynthEx** relies on the following R packages: **mclust**, **flsa**, **foreach**, **DNAcopy**, **ggplot2**, **gridExtra**, **inline**, and **Rcpp**. Among these, **DNAcopy** is hosted on BioConductor and all the others are hosted on CRAN. 
+  ```R
+  install.packages ("mclust")
+  install.packages ("flsa")
+  install.packages ("foreach")
+  install.packages ("ggplot2")
+  install.packages ("gridExtra")
+  install.packages ("inline")
+  install.packages ("Rcpp")
+  source("https://bioconductor.org/biocLite.R")
+  biocLite()
+  biocLite("DNAcopy")
+  ```
 
+**SynthEx** can be installed from github directly as follows:
+
+  ```R
+  install.packages ("devtools")
+  library(devtools)
+  install_github("ChenMengjie/SynthEx")
+  ```
+  
 ### Tutorial
 
-A tutorial with examples illustrating the usage of **SynthEx** is distributed together with the package. 
+A tutorial with examples illustrating the usage of **SynthEx** is distributed together with the package, also available at: https://github.com/ChenMengjie/SynthEx/blob/master/inst/doc/SynthExUserGuide.pdf. 
 After installation, the tutorial can also be invoked by **SynthExUserGuide()**. 
 
 

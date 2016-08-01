@@ -28,7 +28,7 @@
       </header>
       <section>
         <h3>
-<a id="synthex-a-comprehensive-suite-of-tools-for-cna-detection-and-tumor-heterogeneity-profiling-from-whole-exome-sequencing-data" class="anchor" href="#synthex-a-comprehensive-suite-of-tools-for-cna-detection-and-tumor-heterogeneity-profiling-from-whole-exome-sequencing-data" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SynthEx: a comprehensive suite of tools for CNA detection and tumor heterogeneity profiling from whole exome sequencing data</h3>
+<a id="synthex" class="anchor" href="#synthex" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SynthEx</h3>
 
 <p><strong>SynthEx</strong> is a comprehensive suite of tools for CNA detection and tumor heterogeneity profiling. 
 It is tailored to cater for the multiple characteristics of different next generation sequencing technologies. </p>
@@ -45,10 +45,27 @@ It is tailored to cater for the multiple characteristics of different next gener
 
 <p><strong>SynthEx</strong> relies on the following R packages: <strong>mclust</strong>, <strong>flsa</strong>, <strong>foreach</strong>, <strong>DNAcopy</strong>, <strong>ggplot2</strong>, <strong>gridExtra</strong>, <strong>inline</strong>, and <strong>Rcpp</strong>. Among these, <strong>DNAcopy</strong> is hosted on BioConductor and all the others are hosted on CRAN. </p>
 
+<div class="highlight highlight-source-r"><pre>  install.packages (<span class="pl-s"><span class="pl-pds">"</span>mclust<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>flsa<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>foreach<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>ggplot2<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>gridExtra<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>inline<span class="pl-pds">"</span></span>)
+  install.packages (<span class="pl-s"><span class="pl-pds">"</span>Rcpp<span class="pl-pds">"</span></span>)
+  source(<span class="pl-s"><span class="pl-pds">"</span>https://bioconductor.org/biocLite.R<span class="pl-pds">"</span></span>)
+  biocLite()
+  biocLite(<span class="pl-s"><span class="pl-pds">"</span>DNAcopy<span class="pl-pds">"</span></span>)</pre></div>
+
+<p><strong>SynthEx</strong> can be installed from github directly as follows:</p>
+
+<div class="highlight highlight-source-r"><pre>  install.packages (<span class="pl-s"><span class="pl-pds">"</span>devtools<span class="pl-pds">"</span></span>)
+  library(<span class="pl-smi">devtools</span>)
+  install_github(<span class="pl-s"><span class="pl-pds">"</span>ChenMengjie/SynthEx<span class="pl-pds">"</span></span>)</pre></div>
+
 <h3>
 <a id="tutorial" class="anchor" href="#tutorial" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tutorial</h3>
 
-<p>A tutorial with examples illustrating the usage of <strong>SynthEx</strong> is distributed together with the package. 
+<p>A tutorial with examples illustrating the usage of <strong>SynthEx</strong> is distributed together with the package, also available at: <a href="https://github.com/ChenMengjie/SynthEx/blob/master/inst/doc/SynthExUserGuide.pdf">https://github.com/ChenMengjie/SynthEx/blob/master/inst/doc/SynthExUserGuide.pdf</a>. 
 After installation, the tutorial can also be invoked by <strong>SynthExUserGuide()</strong>. </p>
 
 <h3>

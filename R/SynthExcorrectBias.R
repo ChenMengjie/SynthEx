@@ -9,7 +9,7 @@ SynthExcorrectBias <- function(tumor, normal, bin.size = 100000, rm.centromere =
 
   if(class(tumor) == "character"){
     tumor <- read.delim(tumor, header = F, as.is = T)
-    if(ncol(normal) != 4)
+    if(ncol(tumor) != 4)
     stop("Wrong input for tumor sample. A bed file is expected")
   }
   colnames(tumor) <- c("chr", "start", "end", "reads")

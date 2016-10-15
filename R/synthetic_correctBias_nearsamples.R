@@ -1,11 +1,10 @@
-synthetic_correctBias_nearsamples <- function(filename, counts, bin.size = 100000, rm.centromere = TRUE, K = 5,
+synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, rm.centromere = TRUE, K = 5,
                                              targetAnnotateBins = NULL, saveplot = TRUE, centromereBins = NULL, chrX = FALSE,
                                              plot = TRUE, result.dir = NULL, prefix = NULL, reads.threshold = 50){
 
   options(scipen = 50)
 
-  sampleData <- read.delim(filename, header = F, as.is = T)
-  colnames(sampleData) <- c("chr", "start", "end", "reads")
+  sampleData <- tumor
 
   if(substr(sampleData[1, 1], 1, 3) == "chr") {
     sampleData[, 1] <- gsub("chr", "", sampleData[, 1])
@@ -29,7 +28,7 @@ synthetic_correctBias_nearsamples <- function(filename, counts, bin.size = 10000
     all.value <- c(all.value, variance)
   }
   minIs <- order(all.value)[1:K]
-  normal <- apply(counts[, minIs], 2, median)
+  normal <- apply(counts[, minIs], 1, median)
   normal[normal < reads.threshold] <- 0
   ratio <- sampleData[, "reads"]/normal
   ratio <- ratio/median(ratio[is.finite(ratio) & ratio != 0], na.rm = T)
@@ -195,7 +194,7 @@ synthetic_correctBias_nearsamples <- function(filename, counts, bin.size = 10000
     ratio.res <- ratio.res[ratio.res[, "chr"]!=23, ]
   }
 
-  res <- list(target.bias.statistics, ratio.res, TRUE, min.i)
+  res <- list(target.bias.statistics, ratio.res, TRUE, minIs)
   names(res) <- c("TargetBiasStatistics", "Ratio", "Synthetic", "Usednormal")
   class(res) <- "RatioCorrectBiasInTargets"
   return(res)

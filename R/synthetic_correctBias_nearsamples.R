@@ -28,7 +28,11 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
     all.value <- c(all.value, variance)
   }
   minIs <- order(all.value)[1:K]
-  normal <- apply(counts[, minIs], 1, median)
+  if(K>1){
+    normal <- apply(counts[, minIs], 1, median)
+  } else {
+    normal <- counts[, minIs]
+  }
   normal[normal < reads.threshold] <- 0
   ratio <- sampleData[, "reads"]/normal
   ratio <- ratio/median(ratio[is.finite(ratio) & ratio != 0], na.rm = T)
@@ -56,7 +60,7 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
   ratio <- ratio.res[, "ratio"]
   ratio.IDs <- paste0(ratio.res[, "chr"], ":", ratio.res[, "start"])
   if(is.null(targetAnnotateBins)){
-    if(!bin.size %in% c(10000, 25000, 50000, 100000)){
+    if(! bin.size %in% c(10000, 25000, 50000, 100000)){
       stop(paste0("SynthEx doesn't have centromere bins pre-calculated for bin size of", bin.size, "; Please use createTargetBins()
                   to generate the required file or consider to use another bin size."))
     } else {
@@ -85,7 +89,8 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
   all.dis.within.target.left <- NULL
   all.dis.within.target.right <- NULL
 
-  allchrs <- ifelse(chrX == TRUE, 1:23, 1:22)
+  if(chrX == TRUE) { allchrs <- 1:23 } else {allchrs <- 1:22}
+
   for(i in allchrs){
     chr.ratio <- ratio[grep(paste0(i, ":"), ratio.IDs)]
     chr.names <- ratio.IDs[grep(paste0(i, ":"), ratio.IDs)]

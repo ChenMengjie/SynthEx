@@ -103,9 +103,9 @@ normalization <- function(ratioCorrectedBias, bedTools.dir, genotype.file, vcf =
     #scatterplot of x and y variables
     if(saveplot == TRUE){
       if(!is.null(prefix)){
-        pdf(paste0(result.dir, "/", prefix, "-BaselinePlot.pdf"), width = 12, height = 6)
+        jpeg(filename = paste0(result.dir, "/", prefix, "-BaselinePlot.jpg"), width = 1200, height = 600, quality=100)
       } else {
-        pdf(paste0(result.dir, "/BaselinePlot.pdf"), width = 12, height = 6)
+        jpeg(filename = paste0(result.dir, "/BaselinePlot.jpg"), width = 1200, height = 600, quality=100)
       }
     }
     scatter <- ggplot(AF.ratio, aes(median.AF, median.ratio)) +  geom_point() +  theme(legend.position = c(1, 1), legend.justification = c(1, 1)) + xlab("median MAF") + ylab("Tumor/Normal Ratio")

@@ -13,7 +13,7 @@
 
 purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
                            bedTools.dir, prefix = NULL, report = TRUE, prop.threshold = 0.001, delta = 0.1,
-                           maf.control = 0.001, tau = 2, sigma = 0.1, len.threshold.K = 10,
+                           maf.control = 0.01, tau = 2, sigma = 0.1, len.threshold.K = 10,
                            group.length.threshold = 2, gain.threshold = log2(1.2), loss.threshold = log2(0.8),
                            WGD = 1.35, pos.prop.threhold = 0.6, pos.log2ratio.threhold = 0.75, Normalized = TRUE){
 
@@ -169,19 +169,23 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
         segRes <- Segment$segmentNormalized <- correctBypurity(Segment$segmentNormalized, purity)
       }
 
-      res <- list(purity, ploidy*2, "")
-      names(res) <- c("Purity", "Ploidy", "Feature")
+      res <- list(purity, ploidy*2)
+      names(res) <- c("Purity", "Ploidy")
       Segment$PurityPloidy <- res
 
     } else {
       purity <- NA
       if(abs(ploidy*2-2) <= 0.05){
 
-        res <- list(purity, ploidy*2, "Normal Like")
+        res <- list(purity, ploidy*2)
+        Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 1)
+        if(!is.null(Segment$segmentNormalized)){
+          Segment$segmentNormalized <- correctBypurity(Segment$segmentNormalized, 1)
+        }
 
       } else {
 
-        res <- list("<10%", ploidy*2, "")
+        res <- list("<10%", ploidy*2)
         Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 0.1)
         if(!is.null(Segment$segmentNormalized)){
           Segment$segmentNormalized <- correctBypurity(Segment$segmentNormalized, 0.1)
@@ -189,22 +193,27 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
 
       }
 
-      names(res) <- c("Purity", "Ploidy", "Feature")
+      names(res) <- c("Purity", "Ploidy")
       Segment$PurityPloidy <- res
     }
   } else {
     purity <- NA
     if(abs(ploidy*2-2) <= 0.05){
-      res <- list(purity, ploidy*2, "Normal Like")
+      res <- list(purity, ploidy*2)
+      Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 1)
+      if(!is.null(Segment$segmentNormalized)){
+        Segment$segmentNormalized <- correctBypurity(Segment$segmentNormalized, 1)
+      }
+
     } else {
-      res <- list("<10%", ploidy*2, "")
+      res <- list("<10%", ploidy*2)
 
       Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 0.1)
       if(!is.null(Segment$segmentNormalized)){
         Segment$segmentNormalized <- correctBypurity(Segment$segmentNormalized, 0.1)
       }
     }
-    names(res) <- c("Purity", "Ploidy", "Feature")
+    names(res) <- c("Purity", "Ploidy")
     Segment$PurityPloidy <- res
   }
 
@@ -235,30 +244,29 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
     if(!is.na(purity)){
       if(purity < 0 ){
         purity <- NA
-        res <- list(purity, ploidy*2, "Normal Like")
-        names(res) <- c("Purity", "Ploidy", "Feature")
+        res <- list(purity, ploidy*2)
+        names(res) <- c("Purity", "Ploidy")
         Segment$PurityPloidy <- res
       }
     }
   }
 
-  if(Segment$PurityPloidy["Feature"] == "Normal Like") {
-    normallike <- TRUE
-  } else {
-    normallike <- FALSE
-  }
+#  if(Segment$PurityPloidy["Feature"] == "Normal Like") {
+#    normallike <- TRUE
+#  } else {
+#    normallike <- FALSE
+#  }
 
   reportname <- "SynthEx_sample_stats.bed"
-  sampleinfo <- data.frame(Segment$PurityPloidy[c("Purity", "Ploidy")], normallike,
+  sampleinfo <- data.frame(Segment$PurityPloidy[c("Purity", "Ploidy")],
                            Segment$WholeGenomeDoubling, Segment$segmentMethod)
 
-  colnames(sampleinfo) <- c("purity", "ploidy", "normallike", "WholeGenomeDoubling", "segmentMethod")
+  colnames(sampleinfo) <- c("purity", "ploidy", "WholeGenomeDoubling", "segmentMethod")
   if(!is.null(prefix)){
     write.table(sampleinfo, paste0(result.dir, "/", prefix, "_", reportname), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
   } else {
     write.table(sampleinfo, paste0(result.dir, "/", reportname), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
   }
-
 
   allsegRes <- Segment$segmentUnadjusted
 

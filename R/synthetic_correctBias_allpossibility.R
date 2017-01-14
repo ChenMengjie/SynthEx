@@ -108,7 +108,8 @@ synthetic_correctBias_allpossibility <- function(filename, syntheticLibrary, bin
   all.dis.within.target.left <- NULL
   all.dis.within.target.right <- NULL
 
-  allchrs <- ifelse(chrX == TRUE, 1:23, 1:22)
+  if(chrX == TRUE) { allchrs <- 1:23 } else {allchrs <- 1:22}
+
   for(i in allchrs){
     chr.ratio <- ratio[grep(paste0(i, ":"), ratio.IDs)]
     chr.names <- ratio.IDs[grep(paste0(i, ":"), ratio.IDs)]

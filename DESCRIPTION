@@ -1,11 +1,11 @@
 Package: SynthEx
 Type: Package
-Title: What the package does (short line)
-Version: 1.02
+Title: Synthetic normal approach to call CNAs.
+Version: 1.04
 Date: 2017-01-09
 Author: Mengjie Chen
-Maintainer: Mengjie Chen <mengjie@email.unc.edu>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Maintainer: Mengjie Chen <mengjiechen@uchicago.edu>
+Description: SynthEx is a comprehensive suite of tools for CNA detection and tumor heterogeneity profiling.
+License: GPL (>=2)
 LinkingTo: mclust, flsa, foreach, DNAcopy, ggplot2, gridExtra, inline, Rcpp
 Imports: mclust, flsa, foreach, DNAcopy, ggplot2, gridExtra, inline, Rcpp

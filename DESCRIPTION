@@ -1,7 +1,7 @@
 Package: SynthEx
 Type: Package
 Title: Synthetic normal approach to call CNAs.
-Version: 1.04
+Version: 1.05
 Date: 2017-01-09
 Author: Mengjie Chen
 Maintainer: Mengjie Chen <mengjiechen@uchicago.edu>

@@ -51,7 +51,7 @@ synthetic_nearsamples_WGS_calratio <- function(tumor, counts, bin.size = 100000,
   }
 
   if(chrX == FALSE){
-    ratio.res <- ratio.res[ratio.res[, "chr"]!=23, ]
+    ratio.res <- ratio.res[ratio.res[, "chr"] != 23 & ratio.res[, "chr"] != 24, ]
   }
 
   res <- list(ratio.res, TRUE)

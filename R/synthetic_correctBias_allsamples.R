@@ -49,6 +49,7 @@ synthetic_correctBias_allsamples <- function(tumor, counts, bin.size = 100000, r
     } else {
       centromere <- read.delim(centromereBins, header = F, as.is = T)
     }
+    centromere[, 2] <- centromere[, 2] + 1
     centromere.IDs <- paste0(centromere[, 1], ":", centromere[, 2])
     ratio.IDs <- paste0(ratio.res[, "chr"], ":", ratio.res[, "start"])
     ratio.res <- ratio.res[! ratio.IDs%in%centromere.IDs, ]
@@ -73,6 +74,7 @@ synthetic_correctBias_allsamples <- function(tumor, counts, bin.size = 100000, r
     target[, 4] <- gsub("chr", "", target[, 4])
   }
 
+  target[, 5] <- target[, 5]+1
   target.IDs <- paste0(target[, 4], ":", target[, 5])
   target.IDs <- target.IDs[!duplicated(target.IDs)]
 
@@ -193,7 +195,7 @@ synthetic_correctBias_allsamples <- function(tumor, counts, bin.size = 100000, r
   ratio.res[, "ratio"] <- ratio
 
   if(chrX == FALSE){
-    ratio.res <- ratio.res[ratio.res[, "chr"]!=23, ]
+    ratio.res <- ratio.res[ratio.res[, "chr"] != 23 & ratio.res[, "chr"] != 24, ]
   }
 
   res <- list(target.bias.statistics, ratio.res, TRUE, min.i)

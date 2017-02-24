@@ -10,7 +10,7 @@ WGS_normalization <- function(tumor.file, normal.file, bin.size = 100000, rm.cen
   if(substr(x[1, 1], 1, 3) == "chr") {
     x[, 1] <- gsub("chr", "", x[, 1])
   }
-  if(x[1, "end"] - x[1, "start"] + 1 != bin.size & x[1, "end"] - x[1, "start"] != bin.size){
+  if(x[1, "end"] - x[1, "start"] != bin.size){
     stop("\"bin.size\" should match with the input file!")
   }
 

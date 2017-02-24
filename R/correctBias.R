@@ -34,6 +34,7 @@ correctBias <- function(tumor, normal, bin.size = 100000, rm.centromere = TRUE,
     } else {
       centromere <- read.delim(centromereBins, header = F, as.is = T)
     }
+    centromere[, 2] <- centromere[, 2] + 1
     centromere.IDs <- paste0(centromere[, 1], ":", centromere[, 2])
     ratio.IDs <- paste0(ratio.res[, "chr"], ":", ratio.res[, "start"])
     ratio.res <- ratio.res[! ratio.IDs%in%centromere.IDs, ]
@@ -54,6 +55,7 @@ correctBias <- function(tumor, normal, bin.size = 100000, rm.centromere = TRUE,
     target <- read.delim(targetAnnotateBins, header = F, as.is = T)
   }
 
+  target[, 5] <- target[, 5]+1
   target.IDs <- paste0(target[, 4], ":", target[, 5])
   target.IDs <- target.IDs[!duplicated(target.IDs)]
 

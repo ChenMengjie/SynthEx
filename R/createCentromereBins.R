@@ -17,7 +17,7 @@ createCentromereBins <- function(cytoband = NULL, bin.size = 100000, write = FAL
   allbins <- NULL
   for(j in 1:nrow(centromere)){
     start <- seq(centromere[j, 2], centromere[j, 3] - bin.size, bin.size)
-    allbins <- rbind(allbins, cbind(centromere[j, 1], start + 1, start + bin.size))
+    allbins <- rbind(allbins, cbind(centromere[j, 1], start, start + bin.size))
   }
   if(write == TRUE){
     write.table(allbins, paste0(result.dir, "/centromere.bin", binsize, ".bed"), col.names = F, row.names = F, quote = F, sep ="\t")

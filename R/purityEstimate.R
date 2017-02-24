@@ -87,7 +87,7 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
 
   segRes$ratio <- 2^segRes[, "log2ratio"]
   subsegRes <- segRes[segRes[, "chr"] %in% c(1:22), ]
-  segLens <- (subsegRes[, "end"] - subsegRes[, "start"] + 1)
+  segLens <- subsegRes[, "end"] - subsegRes[, "start"]
   ploidy <- sum(segLens*subsegRes[, "ratio"])/sum(segLens)
 
   subsegRes <- subsegRes[, c("chr", "start", "end", "ratio")]
@@ -219,14 +219,14 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
 
   segRes <- Segment$segmentUnadjusted
   subsegRes <- segRes[segRes[, "chr"] %in% c(1:22), ]
-  segLens <- subsegRes[, "end"] - subsegRes[, "start"]+1
+  segLens <- subsegRes[, "end"] - subsegRes[, "start"]
   ploidy <- sum(segLens*subsegRes[, "correctedRatiobyPurity"])/sum(segLens)
   Segment$PloidyUnadjusted <- ploidy*2
 
   if(!is.null(Segment$segmentNormalized)){
     segRes <- Segment$segmentNormalized
     subsegRes <- segRes[segRes[, "chr"] %in% c(1:22), ]
-    segLens <- subsegRes[, "end"] - subsegRes[, "start"]+1
+    segLens <- subsegRes[, "end"] - subsegRes[, "start"]
     ploidy <- sum(segLens*subsegRes[, "correctedRatiobyPurity"])/sum(segLens)
     Segment$PurityPloidy["Ploidy"] <- ploidy*2
 

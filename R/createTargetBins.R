@@ -10,7 +10,7 @@ createTargetBins <- function(Target, bin.size){
     } else {
       atarget <- seq(res[i, 5], res[i, 6] - bin.size, bin.size)
       len <- length(atarget)
-      all <- rbind(all, cbind(res[i, 1:4], atarget + 1, atarget + bin.size))
+      all <- rbind(all, cbind(res[i, 1:4], atarget, atarget + bin.size))
     }
   }
   all <- as.data.frame(all)

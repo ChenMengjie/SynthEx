@@ -17,10 +17,13 @@ SynthExcorrectBias <- function(tumor, normal, bin.size = 100000, rm.centromere =
     tumor[, 1] <- gsub("chr", "", tumor[, 1])
   }
   tumor[, 1] <- gsub("X", "23", tumor[, 1])
-  len <- tumor[1, "end"] - tumor[1, "start"] + 1
-  if(len != bin.size){
+  tumor[, 1] <- gsub("Y", "24", tumor[, 1])
+  len <- tumor[1, "end"] - tumor[1, "start"]
+  if(len != bin.size ){
     stop("\"bin.size\" should match with the input file!")
   }
+  tumor[, 2] <- tumor[, 2] + 1
+
 
   if(class(normal) == "character"){
     normal <- read.delim(normal, header = F, as.is = T)
@@ -31,12 +34,15 @@ SynthExcorrectBias <- function(tumor, normal, bin.size = 100000, rm.centromere =
         normal[, 1] <- gsub("chr", "", normal[, 1])
       }
       normal[, 1] <- gsub("X", "23", normal[, 1])
+      normal[, 1] <- gsub("Y", "24", normal[, 1])
       colnames(normal) <- c("chr", "start", "end", "reads")
-      len2 <- normal[1, "end"] - normal[1, "start"] + 1
-      if(len2 != bin.size | len != len2){
+      len2 <- normal[1, "end"] - normal[1, "start"]
+      if( len2 != bin.size | len != len2){
         stop("Wrong input for normal sample. Normal can be either one matched sample or any number of multiple samples.")
       }
     }
+
+    normal[, 2] <- normal[, 2] + 1
 
     if(ncol(normal) > 4){
       if(K > 1){

@@ -27,7 +27,7 @@ SynthExPipeline <- function(tumor, normal, bin.size, bedTools.dir, genotype.file
     ratiotoSeg <- ratioCorrectedBias
   }
 
-  Seg <- createSegments(ratiotoSeg, segmentMethod, smoothk = smoothk, ratio.cutoff = ratio.cutoff)
+  Seg <- createSegments(ratiotoSeg, segmentMethod)
 
   if(verbose == TRUE) print("Segmentation finished.")
 

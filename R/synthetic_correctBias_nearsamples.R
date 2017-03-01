@@ -91,7 +91,7 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
   all.dis.within.target.left <- NULL
   all.dis.within.target.right <- NULL
 
-  if(chrX == TRUE) { allchrs <- 1:23 } else {allchrs <- 1:22}
+  allchrs <- 1:22
 
   for(i in allchrs){
     chr.ratio <- ratio[grep(paste0(i, ":"), ratio.IDs)]
@@ -196,6 +196,12 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
   ratio[is.infinite(ratio) | is.nan(ratio)] <- NA
   ratio <- round(ratio/median(ratio, na.rm = T), 3)
   ratio.res[, "ratio"] <- ratio
+
+  if(!is.null(prefix)){
+    write.table(ratio.res, paste0(result.dir, "/", prefix, "_Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  } else {
+    write.table(ratio.res, paste0(result.dir, "/Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  }
 
   if(chrX == FALSE){
     ratio.res <- ratio.res[ratio.res[, "chr"] != 23 & ratio.res[, "chr"] != 24, ]

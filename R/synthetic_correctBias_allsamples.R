@@ -194,6 +194,12 @@ synthetic_correctBias_allsamples <- function(tumor, counts, bin.size = 100000, r
   ratio <- round(ratio/median(ratio, na.rm = T), 3)
   ratio.res[, "ratio"] <- ratio
 
+  if(!is.null(prefix)){
+    write.table(ratio.res, paste0(result.dir, "/", prefix, "_Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  } else {
+    write.table(ratio.res, paste0(result.dir, "/Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  }
+
   if(chrX == FALSE){
     ratio.res <- ratio.res[ratio.res[, "chr"] != 23 & ratio.res[, "chr"] != 24, ]
   }

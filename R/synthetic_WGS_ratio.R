@@ -53,6 +53,12 @@ synthetic_WGS_calratio <- function(tumor, counts, bin.size = 100000, rm.centrome
     ratio.res <- ratio.res[! ratio.IDs%in%centromere.IDs, ]
   }
 
+  if(!is.null(prefix)){
+    write.table(ratio.res, paste0(result.dir, "/", prefix, "_Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  } else {
+    write.table(ratio.res, paste0(result.dir, "/Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
+  }
+
   if(chrX == FALSE){
     ratio.res <- ratio.res[ratio.res[, "chr"]!=23, ]
   }

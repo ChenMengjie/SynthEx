@@ -64,7 +64,7 @@ for line in sys.stdin:
             
             if type == 'snp' and GT == '0/1' and DP > min_read_depth and MAF > min_AF:
                 pass_count += 1
-                seq = (str(fields[0]).replace('chr', ''), str(fields[1]), str(int(fields[1])+1), str(MAF))
+                seq = (str(fields[0]).replace('chr', ''), str(int(fields[1])-1), str(int(fields[1])), str(MAF))
                 output = '\t'.join(seq)
                 print output
             else:

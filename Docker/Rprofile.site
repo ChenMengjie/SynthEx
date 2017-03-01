@@ -1,0 +1,11 @@
+.First <- function(){
+cat ("\nStarting R with Synthex at", date(),"\n")
+library(SynthEx)
+intersectBed.dir <- system ("which intersectBed",intern=TRUE)
+
+}
+
+.Last <- function () {
+
+cat ("\nFinishing R with Synthex at", date(),"\n")
+}

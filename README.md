@@ -43,4 +43,4 @@ After installation, the tutorial can also be invoked by **SynthExUserGuide()**.
 
 **Mengjie Chen** (UNC)
 
-Bug report, comments or questions please send to mengjie@email.unc.edu.
+Bug report, comments or questions please send to mengjiechen@uchicago.edu.

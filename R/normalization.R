@@ -58,7 +58,7 @@ normalization <- function(ratioCorrectedBias, bedTools.dir, genotype.file, vcf =
 
   if( ! all(sorted.median.ratio == 1) ){
 
-    require(mclust)
+    suppressPackageStartupMessages(require(mclust))
     #Identify 2n cluster - Diploid reference#
     mccluster <- Mclust(sorted.median.ratio, G = 1:5, prior = priorControl(functionName = "defaultPrior", shrinkage = 0.1))
     means <- mccluster$parameters$mean
@@ -95,8 +95,8 @@ normalization <- function(ratioCorrectedBias, bedTools.dir, genotype.file, vcf =
 
   AF.ratio <- data.frame(median.AF, median.ratio, row.names = NULL)
 
-  require(ggplot2)
-  require(gridExtra)
+  suppressPackageStartupMessages(require(ggplot2))
+  suppressPackageStartupMessages(require(gridExtra))
   theme_set(theme_bw())
 
   if(plot == TRUE) {

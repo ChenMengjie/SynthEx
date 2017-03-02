@@ -55,12 +55,18 @@ synthetic_WGS_calratio <- function(tumor, counts, bin.size = 100000, rm.centrome
 
   if(!is.null(prefix)){
     log2ratio <- ratio.res
+<<<<<<< HEAD
     log2ratio[, "start"] <- log2ratio[, "start"] - 1
+=======
+>>>>>>> origin/master
     log2ratio[, "ratio"] <- log2(ratio.res[, "ratio"]+0.0001)
     write.table(log2ratio, paste0(result.dir, "/", prefix, "_Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
   } else {
     log2ratio <- ratio.res
+<<<<<<< HEAD
     log2ratio[, "start"] <- log2ratio[, "start"] - 1
+=======
+>>>>>>> origin/master
     log2ratio[, "ratio"] <- log2(ratio.res[, "ratio"]+0.0001)
     write.table(log2ratio, paste0(result.dir, "/Ratio.bed"), sep = "\t", quote = FALSE, col.names = TRUE, row.names = FALSE)
   }

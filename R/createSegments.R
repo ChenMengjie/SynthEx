@@ -17,7 +17,7 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
 
   bin.size <- ratioNormalized$end[1] - ratioNormalized$start[1] + 1
   if(segmentMethod == "CBS"){
-    require(DNAcopy)
+    suppressPackageStartupMessages(require(DNAcopy))
     #seg <- segment(CNA(subratioNormalized[, "normalized"], subratioNormalized[, "chr"], subratioNormalized[, "start"]), verbose = 0)
     #segRes <- seg$output[, c(2:4, 6)]
     #segRes[, 3] <- segRes[, 3] + bin.size - 1
@@ -42,7 +42,7 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
   }
 
   if(segmentMethod == "TrendFiltering"){
-    require(flsa)
+    suppressPackageStartupMessages(require(flsa))
     lambda2 <- 0:60/10
     ratioDiff <- diff(subratioNormalized[, "normalized"])
     ratioDiff <- ratioDiff[!is.nan(ratioDiff) & is.finite(ratioDiff)]
@@ -91,7 +91,7 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
   }
 
   if(segmentMethod == "TrendFiltering"){
-    require(flsa)
+    suppressPackageStartupMessages(require(flsa))
     lambda2 <- 0:60/10
     ratioDiff <- diff(subRatio[, "ratio"])
     ratioDiff <- ratioDiff[!is.nan(ratioDiff) & is.finite(ratioDiff)]

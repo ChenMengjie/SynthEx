@@ -70,8 +70,8 @@ if (debug) {cat ("Generating centromere Bins\n")}
 centromereBins <- createCentromereBins(bin.size=bin.size)
 
 
-cat ("------Running SynthExPipeline------\n")}
+cat ("------Running SynthExPipeline------\n")
 Segfrompipe <- SynthExPipeline (tumor.file,normal.file,bin.size=bin.size,intersectBed.dir,genotype.file=genotype.file, result.dir,working.dir,prefix=sample.name,verbose=debug)
 
-cat ("------Finished running SynthExPipeline------\n")}
+cat ("------Finished running SynthExPipeline------\n")
 

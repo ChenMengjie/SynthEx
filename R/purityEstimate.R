@@ -22,8 +22,8 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
 
   len.threshold <- len.threshold.K
 
-  library(inline)
-  library(Rcpp)
+  suppressPackageStartupMessages(library(inline))
+  suppressPackageStartupMessages(library(Rcpp))
 
   src <- '
     NumericVector X(X_);

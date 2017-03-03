@@ -14,13 +14,14 @@ RUN Rscript -e 'install.packages (c("mclust","flsa","foreach","ggplot2","gridExt
 
 
 ADD https://github.com/arq5x/bedtools2/releases/download/v2.26.0/bedtools-2.26.0.tar.gz bedtools-2.26.0.tar.gz
-RUN tar zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
+RUN tar --no-same-owner -zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
 
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* bedtools*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /bedtools*
+
+COPY Rprofile.site /etc/R/
+COPY SynthEx.R /SynthEx.R
 
 ENTRYPOINT ["Rscript", "/SynthEx.R"]
 CMD ["--help"]
-ADD Rprofile.site /etc/R
-ADD SynthEx.R /SynthEx.R

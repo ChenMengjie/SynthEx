@@ -14,7 +14,7 @@ RUN Rscript -e 'install.packages (c("mclust","flsa","foreach","ggplot2","gridExt
 
 
 ADD https://github.com/arq5x/bedtools2/releases/download/v2.26.0/bedtools-2.26.0.tar.gz bedtools-2.26.0.tar.gz
-RUN tar -zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
+RUN tar zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
 
 
 # Clean up APT when done.

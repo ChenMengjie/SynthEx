@@ -27,6 +27,10 @@ option_list <- list (
                                   default="/tmp",
                                   help="the temporary directory [default %default]"),
                      
+                     make_option (c("-k","--numnormals"),
+                                  default="4",
+                                  help="the number of normals to use for normalization [default %default]"),
+                     
                      make_option (c("-b","--bin"),
                                   default=50000,
                                   help="The bin size for the genome windows[default %default]"),
@@ -59,6 +63,8 @@ normal.file <- opt$normal
 tumor.file <- opt$tumor
 sample.name <- opt$samplename
 genotype.file <- opt$genotype
+numnormals <- opt$numnormals
+
 debug <- opt$debug
 if (debug) {
     cat (paste("bin.size:", bin.size,"\n","tumor.file:",tumor.file,"\nnormal.file:",normal.file,"\ngenotype.file: ",genotype.file,"\n"))
@@ -71,7 +77,14 @@ centromereBins <- createCentromereBins(bin.size=bin.size)
 
 
 cat ("------Running SynthExPipeline------\n")
-Segfrompipe <- SynthExPipeline (tumor.file,normal.file,bin.size=bin.size,intersectBed.dir,genotype.file=genotype.file, result.dir,working.dir,prefix=sample.name,verbose=debug)
+Segfrompipe <- SynthExPipeline (tumor.file,normal.file,
+                                bin.size=bin.size,
+                                intersectBed.dir,
+                                genotype.file=genotype.file, 
+                                result.dir,working.dir,
+                                prefix=sample.name,
+                                verbose=debug,
+                                K=numnormals)
 
 cat ("------Finished running SynthExPipeline------\n")
 

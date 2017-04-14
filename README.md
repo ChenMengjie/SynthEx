@@ -41,6 +41,6 @@ After installation, the tutorial can also be invoked by **SynthExUserGuide()**.
 
 ### Author
 
-**Mengjie Chen** (UNC)
+**Mengjie Chen** (U Chicago)
 
 Bug report, comments or questions please send to mengjiechen@uchicago.edu.

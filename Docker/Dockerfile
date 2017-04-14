@@ -18,9 +18,10 @@ RUN tar zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
 
 
 # Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* bedtools*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /bedtools*
+
+COPY Rprofile.site /etc/R/
+COPY SynthEx.R /SynthEx.R
 
 ENTRYPOINT ["Rscript", "/SynthEx.R"]
 CMD ["--help"]
-ADD Rprofile.site /etc/R
-ADD SynthEx.R /SynthEx.R

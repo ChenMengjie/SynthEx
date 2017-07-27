@@ -1,6 +1,6 @@
 createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendFiltering")){
 
-  if(class(ratio) != "RatioNormalized")
+  if(class(ratio) != "RatioCorrectBiasInTargets" & class(ratio) != "RatioNormalized")
     stop("Invalid input class for createSegments().")
 
   if(!is.null(ratio$type)){

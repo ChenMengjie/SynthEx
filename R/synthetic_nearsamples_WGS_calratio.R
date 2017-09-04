@@ -25,7 +25,7 @@ synthetic_nearsamples_WGS_calratio <- function(tumor, counts, bin.size = 100000,
     all.value <- c(all.value, variance)
   }
   minIs <- order(all.value)[1:K]
-  normal <- apply(counts[, minIs], 2, median)
+  normal <- apply(counts[, minIs], 1, median)
   normal[normal < reads.threshold] <- 0
   ratio <- sampleData[, "reads"]/normal
   ratio <- ratio/median(ratio[is.finite(ratio) & ratio != 0], na.rm = T)

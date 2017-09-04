@@ -40,7 +40,7 @@ calratioWGS <- function(tumor, normal, bin.size = 100000, rm.centromere = TRUE, 
   normal[, 2] <- normal[, 2] + 1
   if(ncol(normal) > 4){
     if(K > 1){
-      WGSRatio <- synthetic_nearsamples_WGS_calratios(tumor, normal[, -c(1:3)], bin.size = bin.size, rm.centromere = rm.centromere, K = K,
+      WGSRatio <- synthetic_nearsamples_WGS_calratio(tumor, normal[, -c(1:3)], bin.size = bin.size, rm.centromere = rm.centromere, K = K,
                                                        centromereBins = centromereBins, chrX = chrX, reads.threshold = reads.threshold)
     } else {
       WGSRatio <- synthetic_WGS_calratio(tumor, normal[, -c(1:3)], bin.size = bin.size, rm.centromere = rm.centromere,

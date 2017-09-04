@@ -175,7 +175,7 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
 
     } else {
       purity <- NA
-      if(abs(ploidy*2-2) <= 0.05){
+      if(abs(ploidy*2-2) <= 0.25){
 
         res <- list(purity, ploidy*2)
         Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 1)
@@ -198,7 +198,7 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
     }
   } else {
     purity <- NA
-    if(abs(ploidy*2-2) <= 0.05){
+    if(abs(ploidy*2-2) <= 0.25){
       res <- list(purity, ploidy*2)
       Segment$segmentUnadjusted <- correctBypurity(Segment$segmentUnadjusted, 1)
       if(!is.null(Segment$segmentNormalized)){

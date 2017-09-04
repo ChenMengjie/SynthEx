@@ -29,7 +29,7 @@ synthetic_correctBias_nearsamples <- function(tumor, counts, bin.size = 100000, 
     all.value <- c(all.value, variance)
   }
   minIs <- order(all.value)[1:K]
-  if(K>1){
+  if(K > 1){
     normal <- apply(counts[, minIs], 1, median)
   } else {
     normal <- counts[, minIs]

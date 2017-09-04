@@ -109,7 +109,6 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
     segRes <- .chr.tosegment(round(denoised.ratio, 2), subRatio)
     segRes[, 2] <- segRes[, 2] - 1
     segRes[, 3] <- segRes[, 3] - 1
-    segRes[, 4] <- round(log2(segRes[, 4]+0.0001), 4)
   }
   segRes <- data.frame(segRes)
 

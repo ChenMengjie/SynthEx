@@ -234,7 +234,7 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
     Segment$PurityPloidy["Ploidy"] <- Segment$PloidyUnadjusted
   }
 
-  if(Segment$PurityPloidy["Ploidy"] >= 3 | Segment$PloidyUnadjusted >= 2.7){
+  if(Segment$PurityPloidy["Ploidy"] >= 3 & Segment$PloidyUnadjusted >= 2.7){
     Segment$WholeGenomeDoubling <- TRUE
   } else {
     Segment$WholeGenomeDoubling <- FALSE

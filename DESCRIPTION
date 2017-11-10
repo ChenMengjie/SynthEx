@@ -1,8 +1,8 @@
 Package: SynthEx
 Type: Package
 Title: A synthetic normal approach to call CNAs from sequencing data.
-Version: 1.05
-Date: 2017-01-09
+Version: 1.06
+Date: 2017-11-10
 Author: Mengjie Chen
 Maintainer: Mengjie Chen <mengjiechen@uchicago.edu>
 Description: SynthEx is a comprehensive suite of tools for CNA detection and tumor heterogeneity profiling.

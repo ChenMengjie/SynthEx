@@ -12,7 +12,7 @@ SynthExPipeline <- function(tumor, normal, bin.size, bedTools.dir, genotype.file
 
   ratioCorrectedBias <- SynthExcorrectBias(tumor, normal, bin.size = bin.size, rm.centromere = rm.centromere,
              targetAnnotateBins = targetAnnotateBins, saveplot = saveplot, centromereBins = centromereBins,
-             chrX = chrX, plot = plot, result.dir = result.dir, working.dir = working.dir, K =K, 
+             chrX = chrX, plot = plot, result.dir = result.dir, working.dir = working.dir, K =K,
              prefix = prefix, reads.threshold = reads.threshold)
 
   if(verbose == TRUE) print("Bias correction finished.")
@@ -36,10 +36,17 @@ SynthExPipeline <- function(tumor, normal, bin.size, bedTools.dir, genotype.file
            pos.log2ratio.threhold = pos.log2ratio.threhold)
 
   if(!is.null(genotype.file)){
-    PurityCorrected <- purityEstimate(Segments, working.dir = working.dir, result.dir = result.dir, bedTools.dir = bedTools.dir,
-     prefix = prefix, report = report, prop.threshold = prop.threshold, delta = delta, maf.control = maf.control,
-     tau = tau, sigma = sigma, len.threshold.K = len.threshold.K, group.length.threshold = group.length.threshold,
-     gain.threshold = gain.threshold, loss.threshold = loss.threshold, Normalized = plotNormalized)
+    if(vcf == TRUE){
+      PurityCorrected <- purityEstimate(Segments, working.dir = working.dir, result.dir = result.dir, bedTools.dir = bedTools.dir,
+      prefix = prefix, report = report, prop.threshold = prop.threshold, delta = delta, maf.control = maf.control,
+      tau = tau, sigma = sigma, len.threshold.K = len.threshold.K, group.length.threshold = group.length.threshold,
+      gain.threshold = gain.threshold, loss.threshold = loss.threshold, Normalized = plotNormalized)
+    } else {
+      PurityCorrected <- purityEstimate(Segments, working.dir = working.dir, result.dir = result.dir, bedTools.dir = bedTools.dir,
+                                        prefix = prefix, report = report, prop.threshold = prop.threshold, delta = delta, maf.control = maf.control,
+                                        tau = tau, sigma = sigma, len.threshold.K = len.threshold.K, group.length.threshold = group.length.threshold,
+                                        gain.threshold = gain.threshold, loss.threshold = loss.threshold, Normalized = plotNormalized, vcf = vcf, genotype.file = genotype.file)
+    }
     if(verbose == TRUE) print("Purity estimation finished.")
     genomeplot <- chromosomeView(PurityCorrected, prefix = prefix, result.dir = result.dir, saveplot = saveplot, lwd = lwd)
     Segments <- PurityCorrected

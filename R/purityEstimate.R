@@ -15,7 +15,7 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
                            bedTools.dir, prefix = NULL, report = TRUE, prop.threshold = 0.001, delta = 0.1,
                            maf.control = 0.01, tau = 2, sigma = 0.1, len.threshold.K = 10,
                            group.length.threshold = 2, gain.threshold = log2(1.2), loss.threshold = log2(0.8),
-                           WGD = 1.35, pos.prop.threhold = 0.6, pos.log2ratio.threhold = 0.75, Normalized = TRUE){
+                           WGD = 1.35, pos.prop.threhold = 0.6, pos.log2ratio.threhold = 0.75, Normalized = TRUE, vcf = TRUE, genotype.file = NULL){
 
   if(is.null(result.dir)) result.dir <- "result"
   if(is.null(working.dir)) working.dir <- "working"
@@ -102,9 +102,17 @@ purityEstimate <- function(Segment, working.dir = NULL, result.dir = NULL,
     clustering <- data.frame(subsegRes, a.sample.cluster)
     write.table(clustering, paste0(working.dir, "/clustering.bed"), col.names = F, row.names = F, sep = "\t", quote = F)
 
-    ff <- paste0(bedTools.dir, " -a ", working.dir, "/tumor.MAF.highcut.bed", " -b ", working.dir, "/clustering.bed -wa -wb > ",
+    if(vcf == TRUE) {
+      ff <- paste0(bedTools.dir, " -a ", working.dir, "/tumor.MAF.highcut.bed", " -b ", working.dir, "/clustering.bed -wa -wb > ",
                working.dir, "/tumor.MAF_clustering.bed")
-    system(ff)
+      system(ff)
+
+    } else {
+      ff <- paste0(bedTools.dir, " -a ", genotype.file, " -b ", working.dir, "/clustering.bed -wa -wb > ",
+                   working.dir, "/tumor.MAF_clustering.bed")
+      system(ff)
+
+    }
 
     maf.clustering <- read.delim(paste0(working.dir, "/tumor.MAF_clustering.bed"), header = F)
     maf <- tapply(maf.clustering[, 4], maf.clustering[, 9], median)

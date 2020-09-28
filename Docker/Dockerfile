@@ -1,21 +1,21 @@
-FROM ubuntu:16.10
+FROM ubuntu:20.04
 
 LABEL maintainer "alanh@unc.edu"
 
 
 # ...put your own build instructions here...
-
-RUN apt-get update && apt-get install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev r-base git
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+RUN apt-get update && apt-get install -y build-essential libcurl4-gnutls-dev libxml2-dev libssl-dev r-base git python
 
 RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://archive.linux.duke.edu/cran'; options(repos = r);" > ~/.Rprofile 
 RUN Rscript -e 'install.packages (c("mclust","flsa","foreach","ggplot2","gridExtra","inline","Rcpp","devtools","optparse")); ' \
-    && Rscript -e 'source("https://bioconductor.org/biocLite.R");biocLite(); biocLite("DNAcopy");' \
+    && Rscript -e 'if (!requireNamespace("BiocManager", quietly = TRUE)) {install.packages("BiocManager")};' \
+    && Rscript -e 'BiocManager::install("DNAcopy");' \
     && Rscript -e 'library(devtools) ; install_github("ChenMengjie/SynthEx");'
 
-
-ADD https://github.com/arq5x/bedtools2/releases/download/v2.26.0/bedtools-2.26.0.tar.gz bedtools-2.26.0.tar.gz
-RUN tar zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
-
+#ADD https://github.com/arq5x/bedtools2/releases/download/v2.26.0/bedtools-2.26.0.tar.gz bedtools-2.26.0.tar.gz
+#RUN tar zxf bedtools-2.26.0.tar.gz && cd bedtools2 && make && make install
+RUN apt-get install bedtools
 
 # Clean up APT when done.
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /bedtools*

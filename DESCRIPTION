@@ -11,3 +11,4 @@ SystemRequirements: gfortran (for mclust)
 LinkingTo: mclust, flsa, foreach, DNAcopy, ggplot2, gridExtra, inline, Rcpp
 Imports: mclust, flsa, foreach, ggplot2, gridExtra, inline, Rcpp
 Remotes: bioc::release/DNAcopy
+Suggests: BiocStyle

@@ -34,13 +34,13 @@ for line in sys.stdin:
     else:
         fields = line.split('\t')
         if len(fields) > 8:
-	    info = fields[7]
+            info = fields[7]
             info_map = get_info_map(info)
             type = info_map['TYPE']            
             
-	    info = fields[8]
+            info = fields[8]
             info_map = info.split(':')
-	    counts = fields[9]
+            counts = fields[9]
             counts_info = get_counts_info(counts, info_map)
             
             GT = counts_info['GT']
@@ -66,7 +66,7 @@ for line in sys.stdin:
                 pass_count += 1
                 seq = (str(fields[0]).replace('chr', ''), str(int(fields[1])-1), str(int(fields[1])), str(MAF))
                 output = '\t'.join(seq)
-                print output
+                print(output)
             else:
                 filter_count += 1
 

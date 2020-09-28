@@ -4,6 +4,7 @@
                       df[, value_field] > 0.1, c("chr", "start", "end", value_field)]
   bin.size <- df$end[1] - df$start[1] + 1
   if(segmentMethod == "CBS"){
+    suppressPackageStartupMessages(require(DNAcopy))
     seg <- segment(CNA(log2(subRatio[, value_field]+0.0001), subRatio[, "chr"], subRatio[, "start"]), verbose = 0)
     segRes <- seg$output[, c(2:4, 6)]
     segRes[, 2] <- segRes[, 2] - 1

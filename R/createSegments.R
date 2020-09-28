@@ -59,7 +59,7 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
 
   ratioNormalized <- ratio$Ratio
   segRes <- .getSegment(ratio$Ratio, 'ratio', segmentMethod)
-  if ('normalized' %in% ratio$Ratio) {
+  if ('normalized' %in% names(ratio$Ratio)) {
     normalizedSeg <- .getSegment(ratio$Ratio, 'normalized', segmentMethod)
   } else {
     normalizedSeg <- NULL

@@ -152,7 +152,6 @@ Lookup(TCGAbreast, show = 6)
 #genotype.file <- "~/Google\\ Drive/Ongoing/SynthEx_paper/Data/Genotype/TCGA-A1-A0SM/tumor.abra85.freebayes.vcf"
 working.dir <- "/tmp/working"
 result.dir <- "/tmp/results"
-#intersectBed.dir <- system()
 freebayes_to_bed <- "freebayes_to_bed.py"
 @
 

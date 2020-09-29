@@ -57,7 +57,6 @@ createSegments <- function(ratio, segmentMethod = c("CBS", "SomaticaEx", "TrendF
   segmentMethod <- match.arg(segmentMethod)
   options(scipen = 50)
 
-  ratioNormalized <- ratio$Ratio
   segRes <- .getSegment(ratio$Ratio, 'ratio', segmentMethod)
   if ('normalized' %in% names(ratio$Ratio)) {
     normalizedSeg <- .getSegment(ratio$Ratio, 'normalized', segmentMethod)

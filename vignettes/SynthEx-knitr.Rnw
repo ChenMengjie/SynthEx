@@ -210,12 +210,12 @@ Segfrompipe <- SynthExPipeline(tumor.file,
 
 
 \subsection{Generate Data from BAM files}
-The count data can be generated from BAM files using standard tools such as \pkg{BEDtools}. The following is an example command to generate count data of a given bin size for one sample using \pkg{BEDtools-2.15.0}:
+The count data can be generated from BAM files using standard tools such as \pkg{BEDtools}. The following is an example command to generate count data of a given bin size for one sample using \pkg{BEDtools-2.29.0}:
 
 \begin{lstlisting}
 samtools view -h -b -q 10 $bamdir | \
-        $bedToolsdir/bin/coverageBed -counts \
-        -split -abam stdin -b $chrbinFile > $outdir/sample.$binsize.bed;
+        bedtools coverage -counts -split
+        -b stdin -a $chrbinFile > $outdir/sample.$binsize.bed;
 
 sort -k1,1 -k2,2n $outdir/sample.$binsize.bed -o $outdir/sample.$binsize.bed
 \end{lstlisting}
